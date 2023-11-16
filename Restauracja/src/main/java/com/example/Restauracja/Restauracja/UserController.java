@@ -12,43 +12,43 @@ import java.util.Optional;
 @RequestMapping("/orders")
 public class UserController {
     @Autowired
-    private UserRepository orderRepository;
+    private UserRepository userRepository;
 
     @GetMapping
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+    public List<User> getAllOrders() {
+        return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        Optional<Order> order = orderRepository.findById(id);
+    public ResponseEntity<User> getOrderById(@PathVariable Long id) {
+        Optional<User> order = userRepository.findById(id);
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Order> addOrder(@RequestBody Order order) {
-        Order savedOrder = orderRepository.save(order);
+    public ResponseEntity<User> addOrder(@RequestBody User order) {
+        User savedOrder = userRepository.save(order);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedOrder);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order order) {
-        if (!orderRepository.existsById(id)) {
+    public ResponseEntity<User> updateOrder(@PathVariable Long id, @RequestBody User order) {
+        if (!userRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
         order.setId(id);
-        User updatedOrder = orderRepository.save(order);
+        User updatedOrder = userRepository.save(order);
         return ResponseEntity.ok(updatedOrder);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
-        if (!orderRepository.existsById(id)) {
+        if (!userRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
-        orderRepository.deleteById(id);
+        userRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 }
