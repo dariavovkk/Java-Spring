@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface OrderRepository extends CrudRepository<Order, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
     @Query("SELECT o FROM Order o")
-    List<Order> findAll();
+    List<User> findAll();
 }
