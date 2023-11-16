@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
-public class OrderController {
+public class UserController {
     @Autowired
-    private OrderRepository orderRepository;
+    private UserRepository orderRepository;
 
     @GetMapping
     public List<Order> getAllOrders() {
@@ -38,7 +38,7 @@ public class OrderController {
         }
 
         order.setId(id);
-        Order updatedOrder = orderRepository.save(order);
+        User updatedOrder = orderRepository.save(order);
         return ResponseEntity.ok(updatedOrder);
     }
 
